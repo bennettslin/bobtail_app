@@ -1,0 +1,25 @@
+// Place all the styles related to the admins controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin quando_rules {
+  font-family: Quando, Georgia, serif;
+  letter-spacing: -0.02em;
+  color: #643;
+ }
+
+.field_with_errors {
+  display: inline;
+  color: red;
+ }
+
+table {
+  th {
+    @include quando_rules;
+    text-align: left;
+   }
+
+  td {
+    padding: 0 20px 0 0;
+   }
+ }
