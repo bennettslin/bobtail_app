@@ -1,16 +1,13 @@
 class NewsItemsController < ApplicationController
 
+  before_filter :admin_logged_in!, except: [:index]
+
   def index
-    @news_page = true
     @news_items = NewsItem.order("created_at DESC").page params[:page]
   end
 
   def new
-    if current_admin?
-      @news_item = NewsItem.new
-    else
-      redirect_to news_items_url
-    end
+    @news_item = NewsItem.new
   end
 
   def edit
@@ -19,10 +16,12 @@ class NewsItemsController < ApplicationController
 
   def create
     @news_item = NewsItem.new(news_items_params)
-    @news_item.admin_name = current_admin.name
+    @news_item.admin_id, @news_item.admin_name =
+      current_admin.id, current_admin.name
     # admin name for news item will persist even if admin is later deleted
+
     if params[:preview]
-      @preview = true
+      @news_item[:entry] = params[:news_item][:entry]
       render "new"
     elsif @news_item.save
       flash[:notice] = "News item posted."
@@ -35,7 +34,7 @@ class NewsItemsController < ApplicationController
   def update
     @news_item= NewsItem.find(params[:id])
     if params[:preview]
-      @preview = true
+      @news_item[:entry] = params[:news_item][:entry]
       render "edit"
     elsif @news_item.update(news_items_params)
       flash[:notice] = "News item updated."

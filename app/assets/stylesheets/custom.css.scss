@@ -29,7 +29,7 @@ header {
 
 h1 {
   @include quando_rules;
-  font-size: 1.8em;
+  font-size: 1.6em;
  }
 
 h3 {
@@ -54,8 +54,6 @@ a {
  }
 
 #horses_logo {
-  margin: auto;
-  width: 50%;
  }
 
 #container {
@@ -66,12 +64,16 @@ a {
    }
  }
 
-input {
-  font-size: 1em;
- }
-
- textarea {
+form {
+  label {
+   }
+  input {
+    font-size: 1em;
+    margin: 2px 0 8px 0;
+   }
+  textarea {
   font-size: 0.8em;
+   }
  }
 
 table {

@@ -1,11 +1,12 @@
 class ShowsItemsController < ApplicationController
 
+  before_filter :admin_logged_in!, except: [:index]
+
   def index
-    @shows_page = true
     @upcoming_shows = ShowsItem.where(["date >= ?",
-      Time.now.at_end_of_day]).order("date")
+      Time.now]).order("date")
     @past_shows = ShowsItem.where(["date <= ?",
-      Time.now.at_end_of_day]).order("date DESC").page params[:page]
+      Time.now]).order("date DESC").page params[:page]
   end
 
   def new

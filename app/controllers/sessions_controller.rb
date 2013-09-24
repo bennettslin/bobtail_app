@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if admin && admin.authenticate(params[:password])
       session[:admin_id] = admin.id
       flash[:notice] = "You are now logged in."
-      redirect_to admins_url
+      redirect_back_or(root_url)
     else
       flash.now[:alert] = "Invalid name or password."
       render "new"
@@ -17,7 +17,18 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     flash[:notice] = "You have logged out."
-    redirect_to root_url
+    redirect_back_or(root_url)
+  end
+
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    clear_return_to
+  end
+
+  private
+
+  def clear_return_to
+    session.delete(:return_to)
   end
 
 end

@@ -1,19 +1,27 @@
+<% if @shows_item.errors.any? %>
+  <ul>
+    <% @shows_item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_for @shows_item do |f| %>
   <div>
     <%= f.label :name, "Venue name" %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, size: "52" %>
   </div>
   <div>
     <%= f.label :webpage, "Venue webpage" %><br>
-    <%= f.text_field :webpage %>
+    <%= f.text_field :webpage, size: "52" %>
   </div>
   <div>
     <%= f.label :city %><br>
-    <%= f.text_field :city %>
+    <%= f.text_field :city, size: "32" %>
   </div>
   <div>
     <%= f.label :state, "State or Country" %><br>
-    <%= f.text_field :state %>
+    <%= f.text_field :state, size: "32" %>
   </div>
   <div>
     <%= f.label :date, "Date and time" %><br>
@@ -22,7 +30,7 @@
   </div>
   <div>
     <%= f.label :extra, "Any extra info" %><br>
-    <%= f.text_field :extra %>
+    <%= f.text_field :extra, size: "52" %>
   </div>
   <%= f.submit %>
 <% end %>
