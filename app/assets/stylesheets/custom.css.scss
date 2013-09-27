@@ -1,49 +1,52 @@
-@mixin quando_rules {
-font-family: Quando, Georgia, serif;
-letter-spacing: -0.05em;
-color: #865;
+// text
+
+@mixin heading_rules {
+  font-family: Rancho, serif;
+  letter-spacing: -0.05em;
+  color: #865;
  }
 
-header {
-  margin: auto;
-  width: 50%;
-  #title_logo {
+@mixin admin_rules {
+  margin: 2px;
+  a, span {
+    background-color: #fed;
+    padding: 5px 8px;
+    border-radius: 15px;
    }
-
-  .menu_buttons {
-    padding: 0;
-   }
-
-  ul li {
-  display: inline;
-   }
- }
-
- body {
-  color: #643;
-  background-color: #ffd;
-  font-family: Fresca, Verdana, sans-serif;
-  font-size: 1.15em;
-  letter-spacing: 0.06em;
  }
 
 h1 {
-  @include quando_rules;
-  font-size: 1.6em;
+  @include heading_rules;
+  font-size: 2.8em;
+  margin: 15px 0 5px 0;
  }
 
 h3 {
-  @include quando_rules;
-  font-size: 1.3em;
-  margin: 30px 0 5px 0;
+  @include heading_rules;
+  font-size: 2.4em;
+  margin: 15px 0 5px 0;
+ }
+
+h4 {
+  @include heading_rules;
+  font-size: 1.6em;
+  margin: 15px 0 5px 0;
+  & span:hover {
+    color: #c87;
+   }
  }
 
 h5 {
   color: #ca9;
   font-size: 0.75em;
   letter-spacing: -0.07em;
-  margin: 0 0;
+  margin: 0;
+ }
 
+// this is just a smaller text
+h6 {
+  font-size: 0.9em;
+  margin: 0;
  }
 
 a {
@@ -53,52 +56,175 @@ a {
   &:active { color: #fb8; }
  }
 
-#horses_logo {
+html {
+  min-height: 400px;
  }
 
-#container {
-  margin: auto;
-  width: 50%;
-  .news_entry {
-    margin: 10px 0;
-   }
+body {
+  min-height: 400px;
+  color: #643;
+  background-color: #ffd;
+  font-family: Fresca, Verdana, sans-serif;
+  font-size: 1.1em;
+  letter-spacing: 0.06em;
  }
 
-form {
-  label {
-   }
-  input {
-    font-size: 1em;
-    margin: 2px 0 8px 0;
-   }
-  textarea {
-  font-size: 0.8em;
-   }
- }
-
-table {
-  td {
-    padding: 2px 25px 0 0;
-   }
- }
-
-footer {
-  margin: 40px 0px;
-  #copyright {
+div#container {
+  min-height: 400px;
+  margin: 0 auto;
+  header {
+    margin: 0 auto;
+    width: 800px;
     text-align: center;
+    #admin_logged {
+      padding: 10px;
+      @include admin_rules;
+     }
+    #title_logo {
+     }
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        display: inline;
+        a.menu_button {
+          &:hover {
+           }
+         }
+       }
+     }
+   }
+
+  div#content {
+    // border: 1px solid black;
+    min-height: 400px;
+    margin: 0 auto 25px auto;
+    padding: 0 0 4em 0;
+    width: 800px;
+    text-align: center;
+    overflow: auto;
+
+    div#admin_post {
+      padding: 10px;
+      @include admin_rules;
+     }
+    #admin_links {
+      @include admin_rules;
+     }
+    div#single_content {
+      margin: auto;
+      width: 600px;
+      text-align: center;
+      #horses_logo {
+        margin: 0 auto;
+       }
+     }
+
+    div#sidebar {
+      width: 27%;
+      float: left;
+      text-align: left;
+     }
+
+    div#main_content {
+      // border: 1px inset #ffd;
+      // border-radius: 12px;
+      width: 72%;
+      float: right;
+     }
+   }
+
+  // to reveal dropdown lists
+  input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    & ~ label span {
+      cursor: pointer;
+     }
+    & ~ ul {
+      max-height: 0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+     }
+    &:checked ~ ul {
+      max-height: 100%;
+      margin: 0 0 0 15px;
+      padding: 0;
+      li {
+        margin: 2px 0 0 0;
+       }
+     }
+   }
+
+  form {
+    margin: auto;
+    width: 450px;
+    text-align: left;
+    label {
+     }
+    input, select {
+      font-size: 1em;
+      margin: 2px 0 8px 0;
+       }
+    .full-width {
+      width: 100%;
+     }
+    .part-width {
+      width: 66%;
+     }
+    textarea {
+      font-size: 0.8em;
+      height: 126px;
+      resize: none;
+     }
+   }
+
+  .news_item {
+    text-align: left;
+    margin: 0 75px;
+    .news_entry {
+      margin: 10px 0;
+     }
+   }
+
+  table {
+    margin: 0 auto;
+    td {
+      padding: 2px 12px 0 12px;
+      text-align: left;
+     }
+   }
+
+  .pagination {
+    @include heading_rules;
+    font-size: 1.6em;
+    text-align: center;
+    margin: 15px 0 0 0;
+   }
+
+  footer {
+    // border: 1px solid black;
+    position: relative;
+    height: 60px;
+    margin: -60px auto 0 auto;
+    width: 800px;
+    #copyright {
+      text-align: center;
+     }
    }
  }
 
 #notice {
   color: green;
  }
+
 #alert {
   color: red;
  }
 
-.pagination {
-  @include quando_rules;
-  font-size: 0.9em;
-  text-align: center;
-  margin: 15px 0 0 0;
+ul#errors {
+  color: red;
+  margin: 0 0 15px 0;
+  padding: 0;
  }

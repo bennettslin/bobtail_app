@@ -2,6 +2,8 @@ class AdminsController < ApplicationController
 
   if Rails.env.production?
     before_action :admin_logged_in!
+  else
+    before_action :admin_logged_in!, except: [:new]
   end
 
   def index

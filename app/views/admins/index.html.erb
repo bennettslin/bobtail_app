@@ -1,5 +1,9 @@
-<h1>List of admins</h1>
+<%= link_to "Create a new admin", new_admin_path %>
+
 <table>
+  <thead>
+    <th colspan="3"><h1>List of admins</h1></th>
+  </thead>
   <% @admins.each do |admin| %>
   <tr>
     <td><%= admin.name %></td>
@@ -8,5 +12,3 @@
   </tr>
   <% end %>
 </table>
-
-<p><%= link_to "Create a new admin", new_admin_path %></p>

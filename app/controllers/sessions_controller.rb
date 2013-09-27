@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
     redirect_back_or(root_url)
   end
 
+  # redirects admin back to page that forced login
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to

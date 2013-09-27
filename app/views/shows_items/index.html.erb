@@ -1,33 +1,39 @@
-<h1>Upcoming shows</h1>
-
 <% if current_admin? %>
-  <p><%= link_to "Post a show", new_shows_item_path %></p>
+  <div id="admin_post">
+    <span><%= link_to "Post a show", new_shows_item_path %></span>
+  </div>
 <% end %>
-
+<h1>Upcoming shows</h1>
 <table>
-  <% @upcoming_shows.each do |shows_item| %>
+  <% if @upcoming_shows.empty? %>
     <tr>
-    <% if shows_item.webpage.present? %>
-      <td><%= link_to shows_item.name, "#{shows_item.webpage}" %></td>
-    <% else %>
-      <td><%= shows_item.name %></td>
-    <% end %>
-    <td><%= shows_item.city %>, <%= shows_item.state %></td>
-    <td><%= shows_item.date.strftime("%b %d at %-I:%M%P") %></td>
-    <td><%= shows_item.extra %></td>
-      <% if current_admin? %>
-      <td id="admin_links">
-        <%= link_to "update", edit_shows_item_path(shows_item) %>
-        <%= link_to "delete", shows_item_path(shows_item),
-          method: :delete, data: { confirm: "Are you sure?" } %>
-      </td>
-    <% end %>
+      <td>No upcoming shows scheduled.</td>
+      <td></td>
     </tr>
+  <% else %>
+    <% @upcoming_shows.each do |shows_item| %>
+      <tr>
+      <% if shows_item.webpage.present? %>
+        <td><%= link_to shows_item.name, "#{shows_item.webpage}" %></td>
+      <% else %>
+        <td><%= shows_item.name %></td>
+      <% end %>
+      <td><%= shows_item.city %>, <%= shows_item.state %></td>
+      <td><%= shows_item.date.strftime("%b %d at %-I:%M%P") %></td>
+      <td><%= shows_item.extra %></td>
+        <% if current_admin? %>
+        <td id="admin_links">
+          <%= link_to "update", edit_shows_item_path(shows_item) %>
+          <%= link_to "delete", shows_item_path(shows_item),
+            method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      <% end %>
+      </tr>
+    <% end %>
   <% end %>
-</table>
+</table><br/>
 
-<h1>Past shows</h1>
-
+<h3>Past shows</h3>
 <table>
   <% @past_shows.each do |shows_item| %>
     <tr>
@@ -49,3 +55,4 @@
   <% end %>
 </table>
 <%= paginate @past_shows %>
+

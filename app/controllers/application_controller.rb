@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     current_admin.present?
   end
 
+  # remembers page from which admin is forced to login
   def store_location
     session[:return_to] = request.original_url
   end

@@ -1,8 +1,9 @@
 class NewsItemsController < ApplicationController
 
-  before_filter :admin_logged_in!, except: [:index]
+  before_action :admin_logged_in!, except: [:index]
 
   def index
+    @news_page = true # for displaying proper header buttons
     @news_items = NewsItem.order("created_at DESC").page params[:page]
   end
 

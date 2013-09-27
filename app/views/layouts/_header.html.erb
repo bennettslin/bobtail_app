@@ -1,67 +1,31 @@
 <header>
   <div id="admin_logged">
     <% if current_admin.present? %>
-      <p>Howdy, <%= current_admin.name %>! |
+      <span>Howdy, <%= current_admin.name %>! |
         <%= link_to "Admins page", admins_path %> |
-        <%= link_to "Logout", logout_path %></p>
+        <%= link_to "Logout", logout_path %></span>
     <% elsif !Rails.env.production? %>
-      <p><%= link_to "Register", new_admin_path %> |
-      <%= link_to "Login", login_path %></p>
+      <span><%= link_to "Register", new_admin_path %> |
+        <%= link_to "Login", login_path %></span>
     <% end %>
   </div>
-
   <div id="title_logo">
     <%= link_to image_tag("bobtail_b.gif"), root_path %>
   </div>
-  <ul class="menu_buttons">
-    <li>
-      <% if @news_page %>
-        <%= image_tag("news_r.gif") %>
-      <% else %>
-        <%= link_to image_tag("news_b.gif"), news_items_path %>
-      <% end %>
-    </li>
-    <li>
-      <% if @audio_page %>
-        <%= image_tag("audio_r.gif") %>
-      <% else %>
-        <%= link_to image_tag("audio_b.gif"), audio_path %>
-      <% end %>
-    </li>
-    <li>
-      <% if @lyrics_page %>
-        <%= image_tag("lyrics_r.gif") %>
-      <% else %>
-        <%= link_to image_tag("lyrics_b.gif"), lyrics_path %>
-      <% end %>
-    </li>
-    <li>
-      <% if @scores_page %>
-        <%= image_tag("scores_r.gif") %>
-      <% else %>
-        <%= link_to image_tag("scores_b.gif"), scores_path %>
-      <% end %>
-    </li>
-    <li>
-      <% if @method_page %>
-        <%= image_tag("method_r.gif") %>
-      <% else %>
-        <%= link_to image_tag("method_b.gif"), method_path %>
-      <% end %>
-    </li>
-    <li>
-      <% if @misc_page %>
-        <%= image_tag("misc_r.gif") %>
-      <% else %>
-        <%= link_to image_tag("misc_b.gif"), misc_path %>
-      <% end %>
-    </li>
-    <li>
-      <% if @shows_page %>
-        <%= image_tag("shows_r.gif") %>
-      <% else %>
-        <%= link_to image_tag("shows_b.gif"), shows_items_path %>
-      <% end %>
-    </li>
+  <ul>
+    <li><%= @news_page ? image_tag("news_r.gif") :
+      (link_to image_tag("news_b.gif"), news_items_path, class: "menu_button") %></li>
+    <li><%= @audio_page ? image_tag("audio_r.gif") :
+      (link_to image_tag("audio_b.gif"), audio_path, class: "menu_button") %></li>
+    <li><%= @lyrics_page ? image_tag("lyrics_r.gif") :
+      (link_to image_tag("lyrics_b.gif"), lyrics_path, class: "menu_button") %></li>
+    <li><%= @scores_page ? image_tag("scores_r.gif") :
+      (link_to image_tag("scores_b.gif"), scores_path, class: "menu_button") %></li>
+    <li><%= @method_page ? image_tag("method_r.gif") :
+      (link_to image_tag("method_b.gif"), method_path, class: "menu_button") %></li>
+    <li><%= @misc_page ? image_tag("misc_r.gif") :
+      (link_to image_tag("misc_b.gif"), misc_path, class: "menu_button") %></li>
+    <li><%= @shows_page ? image_tag("shows_r.gif") :
+      (link_to image_tag("shows_b.gif"), shows_items_path, class: "menu_button") %></li>
   </ul>
 </header>

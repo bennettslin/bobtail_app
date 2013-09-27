@@ -1,8 +1,9 @@
 class ShowsItemsController < ApplicationController
 
-  before_filter :admin_logged_in!, except: [:index]
+  before_action :admin_logged_in!, except: [:index]
 
   def index
+    @shows_page = true # for displaying proper header buttons
     @upcoming_shows = ShowsItem.where(["date >= ?",
       Time.now]).order("date")
     @past_shows = ShowsItem.where(["date <= ?",
