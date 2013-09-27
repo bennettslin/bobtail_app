@@ -1,0 +1,36 @@
+<div id="sidebar">
+  Meet&hellip;
+  <% if @main_band_page.present? %>
+    <h4>&hellip;the band!</h4>
+  <% else %>
+    <h4><%= link_to "&hellip;the band!".html_safe, projects_path %></h4>
+  <% end %>
+  <% @admins.each do |this_admin| %>
+
+    <% if @admin.present? && this_admin.id == @admin.id %>
+      <% if @project.present?  %>
+        <h4><%= link_to "&hellip;#{this_admin.name}!".html_safe,
+          admin_path(this_admin) %></h4>
+      <% else %>
+        <h4>&hellip;<%= this_admin.name %>!</h4>
+      <% end %>
+      <% if @admin_projects.present? %>
+        <ul>
+          <% @admin_projects.each do |project| %>
+
+            <% if @project == project %>
+              <li><%= project.title %></li>
+            <% else %>
+              <li><%= link_to project.title, project_path(project) %></li>
+            <% end %>
+
+          <% end %>
+        </ul>
+      <% end %>
+    <% else %>
+      <h4><%= link_to "&hellip;#{this_admin.name}!".html_safe,
+        admin_path(this_admin) %></h4>
+    <% end %>
+
+  <% end %>
+</div>

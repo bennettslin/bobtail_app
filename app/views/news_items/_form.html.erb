@@ -17,7 +17,7 @@
   </div>
   <% if params[:preview] %>
     Preview entry<br>
-    <blockquote><%= @news_item.entry.html_safe %></blockquote>
+    <div id="preview_text"><%= @news_item.entry.html_safe %></div>
   <% end %>
   <%= f.submit "Preview entry", name: "preview" %>
   <%= f.submit %>

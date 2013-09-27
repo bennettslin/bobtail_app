@@ -12,7 +12,7 @@
     <%= f.text_field :name, class: "full-width" %>
   </div>
   <div>
-    <%= f.label :webpage, "Venue webpage" %><br>
+    <%= f.label :webpage, "Venue webpage (optional)" %><br>
     <%= f.text_field :webpage, class: "full-width" %>
   </div>
   <div>
@@ -24,12 +24,12 @@
     <%= f.text_field :state, class: "part-width" %>
   </div>
   <div>
-    <%= f.label :date, "Date and time" %><br>
+    <%= f.label :date, "Date and Time" %><br>
     <%= f.datetime_select :date, default: Time.now.at_end_of_day - 2.hours,
       ampm: true, minute_step: 15 %>
   </div>
   <div>
-    <%= f.label :extra, "Any extra info" %><br>
+    <%= f.label :extra, "Any extra info (optional)" %><br>
     <%= f.text_field :extra, class: "full-width" %>
   </div>
   <%= f.submit %>

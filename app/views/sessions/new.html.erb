@@ -1,20 +1,21 @@
-<% unless current_admin? %>
-
-  <h1>Admin login</h1>
-  <%= form_tag sessions_path do %>
-  <div>
-    <%= label_tag "name", "Name" %><br>
-    <%= text_field_tag "name" %>
+<div id="single_content">
+  <div id="admin_content">
+    <% unless current_admin? %>
+        <h1>Admin login</h1>
+        <%= form_tag sessions_path do %>
+        <div>
+          <%= label_tag :name, "Name" %><br>
+          <%= text_field_tag :name, "", class: "part-width" %>
+        </div>
+        <div>
+          <%= label_tag :password, "Password" %><br>
+          <%= password_field_tag :password, "", class: "part-width" %>
+        </div>
+          <%= submit_tag "Log in" %>
+        <% end %>
+      <% else %>
+        <p>You're already logged in.</p>
+        <%= link_to "Back to admins page", admins_path %>
+    <% end %>
   </div>
-  <div>
-    <%= label_tag "password", "Password" %><br>
-    <%= password_field_tag "password" %>
-  </div>
-    <%= submit_tag "Log in" %>
-  <% end %>
-<% else %>
-
-  <p>You're already logged in.</p>
-  <%= link_to "Back to admins page", admins_path %>
-
-<% end %>
+</div>

@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923070949) do
+ActiveRecord::Schema.define(version: 20130927201444) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   add_index "admins", ["name"], name: "index_admins_on_name", unique: true
@@ -27,8 +28,16 @@ ActiveRecord::Schema.define(version: 20130923070949) do
     t.text     "entry"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "admin_id"
     t.string   "admin_name"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "order_num"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "admin_id"
   end
 
   create_table "shows_items", force: true do |t|

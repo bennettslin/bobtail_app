@@ -1,13 +1,21 @@
 class AdminsController < ApplicationController
 
   if Rails.env.production?
-    before_action :admin_logged_in!
+    before_action :admin_logged_in!, except: [:show]
   else
-    before_action :admin_logged_in!, except: [:new]
+    before_action :admin_logged_in!, except: [:show, :new, :create]
   end
 
   def index
     @admins = Admin.all
+  end
+
+  def show
+    store_location
+    @projects_page = true
+    @admins = Admin.all
+    @admin = Admin.find(params[:id])
+    @admin_projects = Project.where("admin_id == ?", @admin.id).order(:order_num)
   end
 
   def new
@@ -33,7 +41,7 @@ class AdminsController < ApplicationController
     @admin = Admin.find(params[:id])
     if @admin.update(admin_params)
       flash[:notice] = "Admin updated."
-      redirect_to admins_url
+      redirect_back_or admins_url
     else
       render "edit"
     end
@@ -49,6 +57,6 @@ class AdminsController < ApplicationController
   private
 
   def admin_params
-    params.require(:admin).permit(:name, :password, :password_confirmation)
+    params.require(:admin).permit(:name, :password, :password_confirmation, :description)
   end
 end

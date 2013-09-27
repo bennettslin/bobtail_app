@@ -1,0 +1,25 @@
+<% if @project.errors.any? %>
+  <ul id="errors">
+    <% @project.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @project do |f| %>
+  <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "full-width" %>
+  </div>
+  <div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: "full-width" %>
+  </div>
+
+  <% if params[:preview] %>
+    Preview entry
+    <div id="preview_text"><%= @project.description.html_safe %></div>
+  <% end %>
+  <%= f.submit "Preview entry", name: "preview" %>
+  <%= f.submit %><br>
+<% end %>

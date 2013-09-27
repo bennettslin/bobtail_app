@@ -2,10 +2,11 @@ BobtailApp::Application.routes.draw do
 
   root "static_pages#home"
 
-  resources :admins, only: [:index, :new, :edit, :create, :update, :destroy]
+  resources :admins
   resources :sessions, only: [:create]
   resources :news_items, only: [:index, :new, :edit, :create, :update, :destroy]
   resources :shows_items, only: [:index, :new, :edit, :create, :update, :destroy]
+  resources :projects
 
   get "login", to: "sessions#new"
   get "logout", to: "sessions#destroy"
@@ -14,7 +15,7 @@ BobtailApp::Application.routes.draw do
   match "/lyrics", to: "static_pages#lyrics", via: "get"
   match "/scores", to: "static_pages#scores", via: "get"
   match "/method", to: "static_pages#method", via: "get"
-  match "/misc", to: "static_pages#misc", via: "get"
+  match "/misc", to: "projects#index", via: "get"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

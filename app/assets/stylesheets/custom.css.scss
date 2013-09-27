@@ -3,49 +3,58 @@
 @mixin heading_rules {
   font-family: Rancho, serif;
   letter-spacing: -0.05em;
+  margin-left: 0.3em;
+  text-indent: -0.3em;
   color: #865;
  }
 
 @mixin admin_rules {
   margin: 2px;
-  a, span {
-    background-color: #fed;
-    padding: 5px 8px;
-    border-radius: 15px;
-   }
+  background-color: #fed;
+  padding: 5px 10px;
+  border-radius: 10px;
+ }
+
+@mixin text_area_rules {
+  margin: 12px 0 18px 0;
  }
 
 h1 {
   @include heading_rules;
   font-size: 2.8em;
-  margin: 15px 0 5px 0;
+  margin-top: 15px;
+  margin-bottom: -3px;
  }
 
 h3 {
   @include heading_rules;
   font-size: 2.4em;
-  margin: 15px 0 5px 0;
+  margin-top: 15px;
+  margin-bottom: -3px;
  }
 
+// Used for sidebar headings that have dropdown menus
 h4 {
   @include heading_rules;
   font-size: 1.6em;
-  margin: 15px 0 5px 0;
+  margin-top: 15px;
+  margin-bottom: 1px;
   & span:hover {
     color: #c87;
    }
  }
 
+// Smaller body text
 h5 {
-  color: #ca9;
-  font-size: 0.75em;
-  letter-spacing: -0.07em;
+  font-size: 0.9em;
   margin: 0;
  }
 
-// this is just a smaller text
+// Smallest and most unassuming text, for caption details and such
 h6 {
-  font-size: 0.9em;
+  color: #ca9;
+  font-size: 0.75em;
+  letter-spacing: -0.07em;
   margin: 0;
  }
 
@@ -63,28 +72,33 @@ html {
 body {
   min-height: 400px;
   color: #643;
-  background-color: #ffd;
+  background-color: #eec;
+  margin: 0;
   font-family: Fresca, Verdana, sans-serif;
   font-size: 1.1em;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
  }
 
 div#container {
   min-height: 400px;
+  background-color: #ffd;
   margin: 0 auto;
+  width: 800px;
   header {
     margin: 0 auto;
-    width: 800px;
     text-align: center;
     #admin_logged {
       padding: 10px;
-      @include admin_rules;
+      span {
+        @include admin_rules;
+       }
      }
     #title_logo {
      }
     ul {
       margin: 0;
       padding: 0;
+      list-style-type: none;
       li {
         display: inline;
         a.menu_button {
@@ -99,14 +113,17 @@ div#container {
     // border: 1px solid black;
     min-height: 400px;
     margin: 0 auto 25px auto;
-    padding: 0 0 4em 0;
-    width: 800px;
+    padding: 10px 10px 60px 10px;
     text-align: center;
     overflow: auto;
-
-    div#admin_post {
-      padding: 10px;
+    #admin_content {
       @include admin_rules;
+     }
+    #admin_span {
+      padding: 10px 0;
+      span {
+        @include admin_rules;
+       }
      }
     #admin_links {
       @include admin_rules;
@@ -124,38 +141,42 @@ div#container {
       width: 27%;
       float: left;
       text-align: left;
+      ul {
+        max-height: 100%;
+        margin: 0 0 0 15px;
+        list-style-type: none;
+        padding: 0;
+        li {
+          margin: 2px 0 0 0;
+         }
+       }
      }
 
     div#main_content {
       // border: 1px inset #ffd;
       // border-radius: 12px;
-      width: 72%;
+      width: 70%;
       float: right;
+      text-align: left;
      }
    }
 
   // to reveal dropdown lists
-  input[type=checkbox] {
-    position: absolute;
-    opacity: 0;
-    & ~ label span {
-      cursor: pointer;
-     }
-    & ~ ul {
-      max-height: 0;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-     }
-    &:checked ~ ul {
-      max-height: 100%;
-      margin: 0 0 0 15px;
-      padding: 0;
-      li {
-        margin: 2px 0 0 0;
-       }
-     }
-   }
+  // input[type=radio] {
+  //   position: absolute;
+  //   opacity: 0;
+  //   & ~ label span {
+  //     cursor: pointer;
+  //    }
+  //   & ~ ul {
+  //     max-height: 0;
+  //     overflow: hidden;
+  //     margin: 0;
+  //     padding: 0;
+  //    }
+
+  //    }
+  //  }
 
   form {
     margin: auto;
@@ -184,8 +205,20 @@ div#container {
     text-align: left;
     margin: 0 75px;
     .news_entry {
-      margin: 10px 0;
+      @include text_area_rules;
      }
+   }
+
+  #preview_text {
+    @include text_area_rules;
+   }
+
+  #project_text {
+    @include text_area_rules;
+   }
+
+  #bandmate_description {
+    @include text_area_rules;
    }
 
   table {
@@ -208,7 +241,6 @@ div#container {
     position: relative;
     height: 60px;
     margin: -60px auto 0 auto;
-    width: 800px;
     #copyright {
       text-align: center;
      }
@@ -226,5 +258,5 @@ div#container {
 ul#errors {
   color: red;
   margin: 0 0 15px 0;
-  padding: 0;
+  list-style-type: none;
  }

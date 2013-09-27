@@ -9,15 +9,19 @@
 <%= form_for @admin do |f| %>
   <div>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "part-width" %>
   </div>
   <div>
     <%= f.label :password %><br>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, class: "part-width" %>
   </div>
   <div>
     <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "part-width" %>
+  </div>
+  <div>
+    <%= f.label :description, "Description for band page (optional)" %><br>
+    <%= f.text_area :description, class: "full-width" %>
   </div>
   <%= f.submit %>
 <% end %>

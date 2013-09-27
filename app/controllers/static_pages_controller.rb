@@ -18,7 +18,5 @@ class StaticPagesController < ApplicationController
     @method_page = true
   end
 
-  def misc
-    @misc_page = true
-  end
+
 end

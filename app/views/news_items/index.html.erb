@@ -1,7 +1,7 @@
 <div id="single_content">
 
   <% if current_admin? %>
-    <div id="admin_post">
+    <div id="admin_span">
       <span><%= link_to "Post a news item", new_news_item_path %></span>
     </div>
   <% end %>
@@ -9,15 +9,15 @@
   <% @news_items.each do |news_item| %>
     <div class="news_item">
       <h3><%= news_item.heading %></h3>
-      <h5>Posted by <%= news_item.admin_name %>
+      <h6>Posted by <%= news_item.admin_name %>
         <%= news_item.created_at.in_time_zone("Pacific Time (US & Canada)").
-        strftime("on %b %d %Y at %-I:%M%P") %></h5>
+        strftime("on %b %d %Y at %-I:%M%P") %></h6>
       <div class="news_entry"><%= news_item.entry.html_safe %></div>
       <% if current_admin? %>
-        <div id="admin_links">
-          <%= link_to "update", edit_news_item_path(news_item) %>
+        <div>
+          <span id="admin_links"><%= link_to "update", edit_news_item_path(news_item) %> |
           <%= link_to "delete", news_item_path(news_item),
-            method: :delete, data: { confirm: "Are you sure?" } %>
+            method: :delete, data: { confirm: "Are you sure?" } %></span>
         </div>
       <% end %>
     </div>

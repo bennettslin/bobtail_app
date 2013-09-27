@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_admin, :current_admin?
+  helper_method :current_admin, :current_admin?, :redirect_back_or
 
   private
 
@@ -34,6 +34,16 @@ class ApplicationController < ActionController::Base
   # remembers page from which admin is forced to login
   def store_location
     session[:return_to] = request.original_url
+  end
+
+  def clear_return_to
+    session.delete(:return_to)
+  end
+
+  # redirects admin back to page that forced login
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    clear_return_to
   end
 
 end

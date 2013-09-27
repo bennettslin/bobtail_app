@@ -17,12 +17,10 @@ class NewsItemsController < ApplicationController
 
   def create
     @news_item = NewsItem.new(news_items_params)
-    @news_item.admin_id, @news_item.admin_name =
-      current_admin.id, current_admin.name
+    @news_item.admin_name = current_admin.name
     # admin name for news item will persist even if admin is later deleted
-
     if params[:preview]
-      @news_item[:entry] = params[:news_item][:entry]
+      temp_preview_changes
       render "new"
     elsif @news_item.save
       flash[:notice] = "News item posted."
@@ -35,7 +33,7 @@ class NewsItemsController < ApplicationController
   def update
     @news_item= NewsItem.find(params[:id])
     if params[:preview]
-      @news_item[:entry] = params[:news_item][:entry]
+      temp_preview_changes
       render "edit"
     elsif @news_item.update(news_items_params)
       flash[:notice] = "News item updated."
@@ -56,6 +54,11 @@ class NewsItemsController < ApplicationController
 
   def news_items_params
     params.require(:news_item).permit(:heading, :entry)
+  end
+
+  def temp_preview_changes
+    @news_item[:heading] = params[:news_item][:heading]
+    @news_item[:entry] = params[:news_item][:entry]
   end
 
 end
