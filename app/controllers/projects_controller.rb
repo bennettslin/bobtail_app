@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
-  before_action :admin_logged_in!, except: [:show]
+  before_action :admin_logged_in!, except: [:index, :show]
+  before_action :store_location, except: [:new, :edit, :create]
 
   def index
     @projects_page = true
@@ -34,7 +35,9 @@ class ProjectsController < ApplicationController
     else
       @project.order_num = last_num + 1
     end
-    if params[:preview]
+    if params[:cancel]
+      redirect_back_or(projects_url)
+    elsif params[:preview]
       temp_preview_changes
       render "new"
     elsif @project.save
@@ -52,6 +55,8 @@ class ProjectsController < ApplicationController
       params[:order_up] ? increment = -1 : increment = 1
       switch_order_nums(increment)
       redirect_to project_url(@project)
+    elsif params[:cancel]
+      redirect_back_or(projects_url)
     elsif params[:preview]
       temp_preview_changes
       render "edit"
@@ -67,7 +72,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy
     flash[:notice] = "Project destroyed."
-    redirect_back_or projects_url
+    redirect_to projects_url
   end
 
   private
@@ -83,14 +88,16 @@ class ProjectsController < ApplicationController
 
   def switch_order_nums(increment)
     @admin = Admin.find_by(id: @project.admin_id)
-    replaced_project = Project.where("admin_id == ?", @admin.id).
+    that_project = Project.where("admin_id == ?", @admin.id).
       find_by(order_num: (@project.order_num + increment))
-    return if replaced_project.nil?
-    replaced_num = @project.order_num
-    this_project_num = replaced_project.order_num
-    @project.update_attribute(:order_num, this_project_num)
-    replaced_project.update_attribute(:order_num, replaced_num)
-    flash[:notice] = "Projects reordered."
+    return if that_project.nil?
+    this_num = @project.order_num
+    that_num = that_project.order_num
+    @project.update_attribute(:order_num, that_num)
+    that_project.update_attribute(:order_num, this_num)
+    # flash[:notice] = "Project reordered."
+    # flash isn't necessary after all, because feedback is instant;
+    # plus it feels smoother without it
   end
 
 end

@@ -1,6 +1,7 @@
 class ShowsItemsController < ApplicationController
 
   before_action :admin_logged_in!, except: [:index]
+  before_action :store_location, except: [:new, :edit, :update]
 
   def index
     @shows_page = true # for displaying proper header buttons
@@ -20,7 +21,9 @@ class ShowsItemsController < ApplicationController
 
   def create
     @shows_item = ShowsItem.new(shows_items_params)
-    if @shows_item.save
+    if params[:cancel]
+      redirect_back_or(shows_items_url)
+    elsif @shows_item.save
       flash[:notice] = "Show posted."
       redirect_to shows_items_url
     else
@@ -30,7 +33,9 @@ class ShowsItemsController < ApplicationController
 
   def update
     @shows_item= ShowsItem.find(params[:id])
-    if @shows_item.update(shows_items_params)
+    if params[:cancel]
+      redirect_back_or(shows_items_url)
+    elsif @shows_item.update(shows_items_params)
       flash[:notice] = "Show updated."
       redirect_to shows_items_url
     else

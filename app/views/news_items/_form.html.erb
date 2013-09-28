@@ -19,6 +19,7 @@
     Preview entry<br>
     <div id="preview_text"><%= @news_item.entry.html_safe %></div>
   <% end %>
+  <%= f.submit "Cancel", name: "cancel" %>
   <%= f.submit "Preview entry", name: "preview" %>
   <%= f.submit %>
 <% end %>

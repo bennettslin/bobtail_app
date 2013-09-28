@@ -5,13 +5,13 @@ class AdminsController < ApplicationController
   else
     before_action :admin_logged_in!, except: [:show, :new, :create]
   end
+  before_action :store_location, except: [:new, :edit, :update]
 
   def index
     @admins = Admin.all
   end
 
   def show
-    store_location
     @projects_page = true
     @admins = Admin.all
     @admin = Admin.find(params[:id])
@@ -28,7 +28,9 @@ class AdminsController < ApplicationController
 
   def create
     @admin = Admin.new(admin_params)
-    if @admin.save
+    if params[:cancel]
+      redirect_back_or(admins_url)
+    elsif @admin.save
       flash[:notice] = "New admin created."
       log_in @admin
       redirect_to admins_url
@@ -39,9 +41,11 @@ class AdminsController < ApplicationController
 
   def update
     @admin = Admin.find(params[:id])
-    if @admin.update(admin_params)
+    if params[:cancel]
+      redirect_back_or(admins_url)
+    elsif @admin.update(admin_params)
       flash[:notice] = "Admin updated."
-      redirect_back_or admins_url
+      redirect_back_or(admins_url)
     else
       render "edit"
     end

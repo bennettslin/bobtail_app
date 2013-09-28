@@ -1,6 +1,7 @@
 class NewsItemsController < ApplicationController
 
   before_action :admin_logged_in!, except: [:index]
+  before_action :store_location, except: [:new, :edit, :update]
 
   def index
     @news_page = true # for displaying proper header buttons
@@ -19,7 +20,9 @@ class NewsItemsController < ApplicationController
     @news_item = NewsItem.new(news_items_params)
     @news_item.admin_name = current_admin.name
     # admin name for news item will persist even if admin is later deleted
-    if params[:preview]
+    if params[:cancel]
+      redirect_back_or(news_items_url)
+    elsif params[:preview]
       temp_preview_changes
       render "new"
     elsif @news_item.save
@@ -32,7 +35,9 @@ class NewsItemsController < ApplicationController
 
   def update
     @news_item= NewsItem.find(params[:id])
-    if params[:preview]
+    if params[:cancel]
+      redirect_back_or(news_items_url)
+    elsif params[:preview]
       temp_preview_changes
       render "edit"
     elsif @news_item.update(news_items_params)

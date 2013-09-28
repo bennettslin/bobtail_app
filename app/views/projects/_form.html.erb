@@ -20,6 +20,7 @@
     Preview entry
     <div id="preview_text"><%= @project.description.html_safe %></div>
   <% end %>
+  <%= f.submit "Cancel", name: "cancel" %>
   <%= f.submit "Preview entry", name: "preview" %>
   <%= f.submit %><br>
 <% end %>

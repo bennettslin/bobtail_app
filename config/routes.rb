@@ -11,11 +11,7 @@ BobtailApp::Application.routes.draw do
   get "login", to: "sessions#new"
   get "logout", to: "sessions#destroy"
 
-  match "/audio", to: "static_pages#audio", via: "get"
   match "/lyrics", to: "static_pages#lyrics", via: "get"
-  match "/scores", to: "static_pages#scores", via: "get"
-  match "/method", to: "static_pages#method", via: "get"
-  match "/misc", to: "projects#index", via: "get"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

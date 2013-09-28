@@ -1,22 +1,12 @@
 class StaticPagesController < ApplicationController
-  def home
-  end
 
-  def audio
-    @audio_page = true
+  before_action :store_location, except: [:new, :edit]
+
+  def home
   end
 
   def lyrics
     @lyrics_page = true
   end
-
-  def scores
-    @scores_page = true
-  end
-
-  def method
-    @method_page = true
-  end
-
 
 end
