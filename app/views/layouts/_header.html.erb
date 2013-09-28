@@ -2,20 +2,20 @@
   <div id="admin_logged">
     <% if !Rails.env.production? %>
       <span>
-        <% if current_admin.present? %>
-          Howdy, <%= current_admin.name %>! |
-            <%= link_to "Admins page", admins_path %> |
-            <%= link_to "Logout", logout_path %>
-        <% else %>
-          <%= link_to "Register", new_admin_path %> |
-            <%= link_to "Login", login_path %>
-        <% end %>
-        <% if session[:return_to].present? %>
-          redirects back to: <%= session[:return_to].
-            reverse.chomp("/0003:tsohlacol//:ptth").reverse %>
-          <!-- couldn't figure out the opposite of chomp, haha -->
-      </span>
+      <% if current_admin.present? %>
+        Howdy, <%= current_admin.name %>! |
+          <%= link_to "Admins page", admins_path %> |
+          <%= link_to "Logout", logout_path %>
+      <% else %>
+        <%= link_to "Register", new_admin_path %> |
+          <%= link_to "Login", login_path %>
       <% end %>
+<!--       <% if session[:return_to].present? %>
+        redirects back to: <%= session[:return_to].
+          reverse.chomp("/0003:tsohlacol//:ptth").reverse %>
+        couldn't figure out the opposite of chomp, haha
+      <% end %> -->
+      </span>
     <% end %>
 
 

@@ -10,4 +10,8 @@ class Admin < ActiveRecord::Base
     write_attribute :name, value
   end
 
+  def to_param
+    "#{id} #{name}".parameterize
+  end
+
 end

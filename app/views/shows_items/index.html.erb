@@ -13,7 +13,7 @@
     <% @upcoming_shows.each do |shows_item| %>
       <tr>
       <% if shows_item.webpage.present? %>
-        <td><%= link_to shows_item.name, "#{shows_item.webpage}" %></td>
+        <td><%= link_to shows_item.name, shows_item.webpage, target: "_blank" %></td>
       <% else %>
         <td><%= shows_item.name %></td>
       <% end %>
@@ -37,7 +37,7 @@
   <% @past_shows.each do |shows_item| %>
     <tr>
     <% if shows_item.webpage.present? %>
-      <td><%= link_to shows_item.name, "http://#{shows_item.webpage}" %></td>
+      <td><%= link_to shows_item.name, shows_item.webpage, target: "_blank" %></td>
     <% else %>
       <td><%= shows_item.name %></td>
     <% end %>
