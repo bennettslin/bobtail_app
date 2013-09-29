@@ -6,7 +6,8 @@
     <%= @project.description.html_safe %>
   </div>
 
-  <% if @admin == current_admin %>
+  <% if current_admin? && current_admin.super_admin ||
+    current_admin == @admin %>
 
   <div id="admin_span">
     <span><%= link_to "update", edit_project_path(@project) %> |

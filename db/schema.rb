@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130928195108) do
+ActiveRecord::Schema.define(version: 20130929015923) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20130928195108) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.boolean  "super_admin",     default: false
   end
 
   add_index "admins", ["name"], name: "index_admins_on_name", unique: true
@@ -62,7 +63,6 @@ ActiveRecord::Schema.define(version: 20130928195108) do
   create_table "songs", force: true do |t|
     t.string   "title"
     t.text     "lyrics"
-    t.string   "audio_file"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "order_num"

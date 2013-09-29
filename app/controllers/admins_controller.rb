@@ -19,11 +19,17 @@ class AdminsController < ApplicationController
   end
 
   def new
+    unless current_admin? && current_admin.super_admin
+      redirect_back_or(projects_url)
+    end
     @admin = Admin.new
   end
 
   def edit
     @admin = Admin.find(params[:id])
+    unless current_admin? && (@admin == current_admin || current_admin.super_admin)
+      redirect_back_or(projects_url)
+    end
   end
 
   def create
@@ -67,7 +73,7 @@ class AdminsController < ApplicationController
   private
 
   def admin_params
-    params.require(:admin).permit(:name, :password, :password_confirmation, :description)
+    params.require(:admin).permit(:name, :password, :password_confirmation, :description, :super_admin)
   end
 
   def temp_preview_changes

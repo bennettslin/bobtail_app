@@ -1,16 +1,21 @@
 <div id="single_content">
   <div id="admin_content">
-    <%= link_to "Create a new album", new_album_path %>
+    <% if current_admin.super_admin %>
+      <%= link_to "Create a new album", new_album_path %>
+    <% end %>
     <table>
       <thead>
         <th colspan="3"><h1>List of albums</h1></th>
       </thead>
       <% @albums.each do |album| %>
       <tr>
-        <td><%= album.title %></td>
-        <td ><%= link_to "update", edit_album_path(album) %> |
-          <%= link_to "delete", album_path(album), method: :delete,
-          data: { confirm: "Are you sure?" } %></td>
+        <td><%= album.title.html_safe %></td>
+        <td ><%= link_to "update", edit_album_path(album) %>
+          <% if current_admin.super_admin %>
+            | <%= link_to "delete", album_path(album), method: :delete,
+              data: { confirm: "Are you sure?" } %>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     </table>

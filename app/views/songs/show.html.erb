@@ -9,9 +9,12 @@
   <% if current_admin? %>
 
   <div id="admin_span">
-    <span><%= link_to "update", edit_song_path(@song) %> |
-      <%= link_to "delete", song_path(@song),
-      method: :delete, data: { confirm: "Are you sure?" } %></span>
+    <span><%= link_to "update", edit_song_path(@song) %>
+      <% if current_admin.super_admin %>
+        | <%= link_to "delete", song_path(@song),
+        method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </span>
   </div>
 
   <div id="admin_span">

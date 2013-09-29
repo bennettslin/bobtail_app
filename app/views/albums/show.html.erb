@@ -10,9 +10,12 @@
     <div id="admin_span">
       <span><%= link_to "Update album description", edit_album_path %></span>
     </div>
-    <div id="admin_span">
-      <span><%= link_to "Create a new song", new_song_path(album_id: @album.id) %></span>
-    </div>
+    <% if current_admin.super_admin? %>
+      <div id="admin_span">
+        <span><%= link_to "Create a new song",
+          new_song_path(album_id: @album.id) %></span>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

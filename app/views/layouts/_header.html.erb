@@ -3,10 +3,10 @@
     <% if !Rails.env.production? %>
       <span>
       <% if current_admin.present? %>
-        Howdy, <%= current_admin.name %>! |
-          <%= link_to "Admins page", admins_path %> |
-          <%= link_to "Albums page", albums_path %> |
-          <%= link_to "Logout", logout_path %>
+        Howdy, <%= current_admin.name %>!
+          | <%= link_to "Admins page", admins_path %>
+          | <%= link_to "Albums page", albums_path %>
+          | <%= link_to "Logout", logout_path %>
       <% else %>
         <%= link_to "Register", new_admin_path %> |
           <%= link_to "Login", login_path %>
@@ -18,26 +18,32 @@
 <!--   <div id="title_logo">
     <%= link_to image_tag("bobtail_b.gif"), root_path %>
   </div> -->
+  <%= image_tag("horses_logo.gif", id: "horses_logo") %>
   <ul id="menu_buttons"><h2>
-    <% if @news_page %>
-      <li class="picked_heading">News</li>
-      <% else %>
-      <li><%= link_to "News", news_items_path %></li>
-    <% end %>
+
     <% if @songs_page %>
       <li class="picked_heading">Music</li>
       <% else %>
       <li><%= link_to "Music", songs_path %></li>
     <% end %>
-    <% if @shows_page %>
-      <li class="picked_heading">Shows</li>
-      <% else %>
-      <li><%= link_to "Shows", shows_items_path %></li>
-    <% end %>
+
     <% if @projects_page %>
       <li class="picked_heading">Band</li>
       <% else %>
       <li><%= link_to "Band", projects_path %></li>
     <% end %>
+
+    <% if @shows_page %>
+      <li class="picked_heading">Shows</li>
+      <% else %>
+      <li><%= link_to "Shows", shows_items_path %></li>
+    <% end %>
+
+    <% if @news_page %>
+      <li class="picked_heading">News</li>
+      <% else %>
+      <li><%= link_to "News", news_items_path %></li>
+    <% end %>
+
   </h2></ul>
 </header>

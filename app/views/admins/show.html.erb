@@ -7,15 +7,16 @@
     <%= @admin.description.html_safe if @admin.description.present? %>
   </div>
 
-  <% if current_admin? && @admin == current_admin %>
+  <% if current_admin? && (@admin == current_admin || current_admin.super_admin) %>
     <div id="admin_span">
-      <span><%= link_to "Update your info", edit_admin_path %></span>
+      <span><%= link_to "Update info", edit_admin_path %></span>
     </div>
+  <% end %>
+  <% if current_admin? && @admin == current_admin %>
     <div id="admin_span">
       <span><%= link_to "Create a new project", new_project_path %></span>
     </div>
   <% end %>
-
 
 </div>
 

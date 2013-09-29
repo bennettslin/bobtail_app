@@ -22,6 +22,10 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    unless @project.admin_id == current_admin.id ||
+      current_admin.super_admin
+      redirect_back_or(projects_url)
+    end
   end
 
   def create
@@ -47,7 +51,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @admins = Admin.all
     @project= Project.find(params[:id])
     if params[:order_up] || params[:order_down]
       params[:order_up] ? increment = -1 : increment = 1

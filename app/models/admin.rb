@@ -7,7 +7,7 @@ class Admin < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def name=(value)
-    value = value.strip.capitalize
+    value = value.strip
     write_attribute :name, value
   end
 

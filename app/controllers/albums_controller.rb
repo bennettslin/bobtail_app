@@ -4,17 +4,20 @@ class AlbumsController < ApplicationController
   before_action :store_location, except: [:new, :edit, :update]
 
   def index
-    @albums = Album.all
+    @albums = Album.order("date ASC")
   end
 
   def show
     @songs_page = true
-    @albums = Album.all
+    @albums = Album.order("date ASC")
     @album = Album.find(params[:id])
     @album_songs = Song.where("album_id == ?", @album.id).order(:order_num)
   end
 
   def new
+    unless current_admin.super_admin
+      redirect_back_or(albums_url)
+    end
     @album = Album.new
   end
 

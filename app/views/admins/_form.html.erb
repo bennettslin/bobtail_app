@@ -11,6 +11,9 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "part-width" %>
   </div>
+
+  <% if (current_admin.super_admin && !@admin.super_admin) ||
+    @admin == current_admin %>
   <div>
     <%= f.label :password %>
     <span class="small_text">(when updating, can be left blank)</span><br>
@@ -20,6 +23,8 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, class: "part-width" %>
   </div>
+  <% end %>
+
   <div>
     <%= f.label :description, "Description for band page" %>
     <span class="small_text">(optional, html-friendly)</span><br>
@@ -31,6 +36,16 @@
       <%= @admin.description.html_safe %>
     </div>
   <% end %>
+
+  <% if current_admin.super_admin &&
+    (@admin == current_admin || !@admin.super_admin) %>
+  <div>
+    <%= f.label :super_admin %>
+    <%= f.check_box :super_admin %>
+    <span class="small_text">(this cannot be undone by you!)</span><br>
+  </div>
+  <% end %>
+
   <%= f.submit "Cancel", name: "cancel" %>
   <%= f.submit "Preview description", name: "preview" %>
   <%= f.submit %>

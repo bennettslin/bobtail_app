@@ -3,7 +3,6 @@ class CreateSongs < ActiveRecord::Migration
     create_table :songs do |t|
       t.string :title
       t.text :lyrics
-      t.string :audio_file
 
       t.timestamps
     end

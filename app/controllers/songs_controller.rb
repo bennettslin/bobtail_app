@@ -10,20 +10,22 @@ class SongsController < ApplicationController
 
   def show
     @songs_page = true
-    @albums = Album.all
+    @albums = Album.order("date ASC")
     @song = Song.find(params[:id])
     @album = Album.find_by(id: @song.album_id)
     @album_songs = Song.where("album_id == ?", @song.album_id).order(:order_num)
   end
 
   def new
+    unless current_admin.super_admin
+      redirect_back_or(albums_url)
+    end
     @song = Song.new
-    @album = Album.find(params[:album_id])
+    @album = Album.find(params[:album_id]) unless params[:album_id].nil?
   end
 
   def edit
     @song = Song.find(params[:id])
-    # @album = Album.find(params[:album_id])
   end
 
   def create
@@ -48,7 +50,6 @@ class SongsController < ApplicationController
   end
 
   def update
-    @albums = Album.all
     @song= Song.find(params[:id])
     if params[:order_up] || params[:order_down]
       params[:order_up] ? increment = -1 : increment = 1
@@ -77,7 +78,7 @@ class SongsController < ApplicationController
   private
 
   def songs_params
-    params.require(:song).permit(:album_id, :title, :lyrics, :audio_file, :order_num)
+    params.require(:song).permit(:album_id, :title, :lyrics, :order_num)
   end
 
   def temp_preview_changes
