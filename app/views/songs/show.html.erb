@@ -1,0 +1,27 @@
+<%= render "sidebar" %>
+
+<div id="main_content">
+  <h3><%= @song.title.html_safe %></h3>
+  <div id="text_description">
+    <%= @song.lyrics.html_safe if @song.lyrics.present? %>
+  </div>
+
+  <% if current_admin? %>
+
+  <div id="admin_span">
+    <span><%= link_to "update", edit_song_path(@song) %> |
+      <%= link_to "delete", song_path(@song),
+      method: :delete, data: { confirm: "Are you sure?" } %></span>
+  </div>
+
+  <div id="admin_span">
+    <%= form_for @song do |f| %>
+      <span><%= f.submit "Move up", name: "order_up" %>
+      <%= f.submit "Move down", name: "order_down" %>
+      Order number is <%= @song.order_num %>.<span>
+    <% end %>
+  </div>
+
+  <% end %>
+</div>
+

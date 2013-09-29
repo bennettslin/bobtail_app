@@ -4,10 +4,8 @@ class ProjectsController < ApplicationController
   before_action :store_location, except: [:new, :edit, :create]
 
   def index
-    @projects_page = true
-    @main_band_page = true
-    @admins = Admin.all
-    @projects = Project.all
+    @admin = Admin.first(order: "created_at ASC")
+    redirect_to admin_path(@admin)
   end
 
   def show
@@ -71,7 +69,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    flash[:notice] = "Project destroyed."
+    flash[:notice] = "Project deleted."
     redirect_to projects_url
   end
 

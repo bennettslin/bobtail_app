@@ -1,0 +1,35 @@
+<% if @album.errors.any? %>
+  <ul id="errors">
+    <% @album.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @album do |f| %>
+  <div>
+    <%= f.label :title %>
+    <span class="small_text">(html-friendly)</span><br>
+    <%= f.text_field :title, class: "full-width" %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <span class="small_text">(optional, html-friendly)</span><br>
+    <%= f.text_area :description, class: "full-width" %>
+  </div>
+  <div>
+    <%= f.label :date, "Month and Year" %>
+    <span class="small_text">(when updating, this resets for some reason)</span><br>
+    <%= f.date_select :date, order: [:month, :year], start_year: 1999 %>
+  </div>
+  <% if params[:preview] %>
+    Preview:
+    <h3><%= @album.title.html_safe %></h3>
+    <div id="preview_text">
+      <%= @album.description.html_safe %>
+    </div>
+  <% end %>
+  <%= f.submit "Cancel", name: "cancel" %>
+  <%= f.submit "Preview", name: "preview" %>
+  <%= f.submit %>
+<% end %>

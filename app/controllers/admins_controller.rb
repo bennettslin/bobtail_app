@@ -30,6 +30,9 @@ class AdminsController < ApplicationController
     @admin = Admin.new(admin_params)
     if params[:cancel]
       redirect_back_or(admins_url)
+    elsif params[:preview]
+      temp_preview_changes
+      render "new"
     elsif @admin.save
       flash[:notice] = "New admin created."
       log_in @admin
@@ -43,6 +46,9 @@ class AdminsController < ApplicationController
     @admin = Admin.find(params[:id])
     if params[:cancel]
       redirect_back_or(admins_url)
+    elsif params[:preview]
+      temp_preview_changes
+      render "edit"
     elsif @admin.update(admin_params)
       flash[:notice] = "Admin updated."
       redirect_back_or(admins_url)
@@ -54,7 +60,7 @@ class AdminsController < ApplicationController
   def destroy
     @admin = Admin.find(params[:id])
     @admin.destroy
-    flash[:notice] = "Admin destroyed."
+    flash[:notice] = "Admin deleted."
     redirect_to admins_url
   end
 
@@ -63,4 +69,9 @@ class AdminsController < ApplicationController
   def admin_params
     params.require(:admin).permit(:name, :password, :password_confirmation, :description)
   end
+
+  def temp_preview_changes
+    @admin[:description] = params[:admin][:description]
+  end
+
 end

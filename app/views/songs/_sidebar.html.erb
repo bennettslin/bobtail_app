@@ -1,0 +1,27 @@
+<div id="sidebar">
+  <% @albums.each do |this_album| %>
+
+    <% if @album.present? && this_album.id == @album.id %>
+      <% if @song.present?  %>
+        <h4><i><%= link_to "#{this_album.title}".html_safe,
+          album_path(this_album) %></i></h4>
+      <% else %>
+        <h4 class="picked_heading"><i><%= this_album.title.html_safe %></i></h4>
+      <% end %>
+      <% if @album_songs.present? %>
+        <ul>
+          <% @album_songs.each do |song| %>
+            <% if @song == song %>
+              <li class="picked_link"><%= song.title.html_safe %></li>
+            <% else %>
+              <li><%= link_to "#{song.title}".html_safe, song_path(song) %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    <% else %>
+      <h4><i><%= link_to "#{this_album.title}".html_safe, album_path(this_album) %></i></h4>
+    <% end %>
+
+  <% end %>
+</div>

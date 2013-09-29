@@ -1,12 +1,18 @@
 <%= render "sidebar" %>
 
 <div id="main_content">
-  <h1><%= @project.title %></h1>
-  <div id="project_text">
+  <h3><%= @project.title.html_safe %></h3>
+  <div id="text_description">
     <%= @project.description.html_safe %>
   </div>
 
   <% if @admin == current_admin %>
+
+  <div id="admin_span">
+    <span><%= link_to "update", edit_project_path(@project) %> |
+      <%= link_to "delete", project_path(@project),
+      method: :delete, data: { confirm: "Are you sure?" } %></span>
+  </div>
 
   <div id="admin_span">
     <%= form_for @project do |f| %>
@@ -16,11 +22,6 @@
     <% end %>
   </div>
 
-  <div id="admin_span">
-    <span><%= link_to "Update this project", edit_project_path(@project) %> |
-      <%= link_to "Delete this project", project_path(@project),
-      method: :delete, data: { confirm: "Are you sure?" } %></span>
-  </div>
   <% end %>
 </div>
 

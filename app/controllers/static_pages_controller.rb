@@ -5,8 +5,4 @@ class StaticPagesController < ApplicationController
   def home
   end
 
-  def lyrics
-    @lyrics_page = true
-  end
-
 end

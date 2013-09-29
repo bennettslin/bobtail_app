@@ -12,7 +12,8 @@
     <%= f.text_field :name, class: "full-width" %>
   </div>
   <div>
-    <%= f.label :webpage, "Venue webpage (optional)" %><br>
+    <%= f.label :webpage, "Venue webpage" %>
+    <span class="small_text">(optional)</span><br>
     <%= f.text_field :webpage, class: "full-width" %>
   </div>
   <div>
@@ -29,7 +30,8 @@
       ampm: true, minute_step: 15 %>
   </div>
   <div>
-    <%= f.label :extra, "Any extra info (optional)" %><br>
+    <%= f.label :extra, "Any extra info" %>
+    <span class="small_text">(optional, please keep it minimal)</span><br>
     <%= f.text_field :extra, class: "full-width" %>
   </div>
   <%= f.submit "Cancel", name: "cancel" %>

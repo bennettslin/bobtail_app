@@ -12,17 +12,26 @@
     <%= f.text_field :name, class: "part-width" %>
   </div>
   <div>
-    <%= f.label :password %><br>
+    <%= f.label :password %>
+    <span class="small_text">(when updating, can be left blank)</span><br>
     <%= f.password_field :password, class: "part-width" %>
   </div>
   <div>
-    <%= f.label :password_confirmation %><br>
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, class: "part-width" %>
   </div>
   <div>
-    <%= f.label :description, "Description for band page (optional)" %><br>
+    <%= f.label :description, "Description for band page" %>
+    <span class="small_text">(optional, html-friendly)</span><br>
     <%= f.text_area :description, class: "full-width" %>
   </div>
+  <% if params[:preview] %>
+    Preview description:
+    <div id="preview_text">
+      <%= @admin.description.html_safe %>
+    </div>
+  <% end %>
   <%= f.submit "Cancel", name: "cancel" %>
+  <%= f.submit "Preview description", name: "preview" %>
   <%= f.submit %>
 <% end %>

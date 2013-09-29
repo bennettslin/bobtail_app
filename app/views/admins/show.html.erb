@@ -2,14 +2,14 @@
 
 <div id="main_content">
 
-  <h1>Meet <%= @admin.name %>!</h1>
-  <div id="bandmate_description">
+  <h1>Meet <%= @admin.name %></h1>
+  <div id="text_description">
     <%= @admin.description.html_safe if @admin.description.present? %>
   </div>
 
   <% if current_admin? && @admin == current_admin %>
     <div id="admin_span">
-      <span><%= link_to "Update your description", edit_admin_path %></span>
+      <span><%= link_to "Update your info", edit_admin_path %></span>
     </div>
     <div id="admin_span">
       <span><%= link_to "Create a new project", new_project_path %></span>

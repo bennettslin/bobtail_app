@@ -8,18 +8,21 @@
 
 <%= form_for @news_item do |f| %>
   <div>
-    <%= f.label :heading %><br>
+    <%= f.label :heading %>
+    <span class="small_text">(html-friendly)</span><br>
     <%= f.text_field :heading, class: "full-width" %>
   </div>
   <div>
-    <%= f.label :entry %><br>
+    <%= f.label :entry %>
+    <span class="small_text">(html-friendly)</span><br>
     <%= f.text_area :entry, class: "full-width" %>
   </div>
   <% if params[:preview] %>
-    Preview entry<br>
+    Preview:
+    <h3><%= @news_item.heading.html_safe %></h3>
     <div id="preview_text"><%= @news_item.entry.html_safe %></div>
   <% end %>
   <%= f.submit "Cancel", name: "cancel" %>
-  <%= f.submit "Preview entry", name: "preview" %>
+  <%= f.submit "Preview", name: "preview" %>
   <%= f.submit %>
 <% end %>

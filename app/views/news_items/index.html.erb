@@ -8,7 +8,7 @@
 
   <% @news_items.each do |news_item| %>
     <div class="news_item">
-      <h3><%= news_item.heading %></h3>
+      <h3><%= news_item.heading.html_safe %></h3>
       <h6>Posted by <%= news_item.admin_name %>
         <%= news_item.created_at.in_time_zone("Pacific Time (US & Canada)").
         strftime("on %b %d %Y at %-I:%M%P") %></h6>

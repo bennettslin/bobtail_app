@@ -1,0 +1,31 @@
+<% if @song.errors.any? %>
+  <ul id="errors">
+    <% @song.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @song do |f| %>
+  <div>
+    <%= f.label :title %>
+    <span class="small_text">(html-friendly)</span><br>
+    <%= f.text_field :title, class: "full-width" %>
+  </div>
+  <div>
+    <%= f.label :lyrics %>
+    <span class="small_text">(optional, html-friendly)</span><br>
+    <%= f.text_area :lyrics, class: "full-width" %>
+  </div>
+  <% if params[:preview] %>
+    Preview:
+    <h3><%= @song.title.html_safe %></h3>
+    <div id="preview_text"><%= @song.lyrics.html_safe %></div>
+  <% end %>
+  <% # a really kludge workaround %>
+  <input id="song_album_id" name="song[album_id]" type="hidden"
+    value="<%= @song.album_id || @album.id %>" />
+  <%= f.submit "Cancel", name: "cancel" %>
+  <%= f.submit "Preview", name: "preview" %>
+  <%= f.submit %>
+<% end %>

@@ -1,34 +1,29 @@
 <div id="sidebar">
   Meet&hellip;
-  <% if @main_band_page.present? %>
-    <h3 class="picked_heading">&hellip;the band!</h3>
-  <% else %>
-    <h3><%= link_to "&hellip;the band!".html_safe, projects_path %></h3>
-  <% end %>
   <% @admins.each do |this_admin| %>
 
     <% if @admin.present? && this_admin.id == @admin.id %>
       <% if @project.present?  %>
-        <h3><%= link_to "&hellip;#{this_admin.name}!".html_safe,
+        <h3><%= link_to "&hellip;#{this_admin.name}".html_safe,
           admin_path(this_admin) %></h3>
       <% else %>
-        <h3 class="picked_heading">&hellip;<%= this_admin.name %>!</h3>
+        <h3 class="picked_heading">&hellip;<%= this_admin.name %></h3>
       <% end %>
       <% if @admin_projects.present? %>
         <ul>
           <% @admin_projects.each do |project| %>
 
             <% if @project == project %>
-              <li class="picked_link"><%= project.title %></li>
+              <li class="picked_link"><%= project.title.html_safe %></li>
             <% else %>
-              <li><%= link_to project.title, project_path(project) %></li>
+              <li><%= link_to project.title.html_safe, project_path(project) %></li>
             <% end %>
 
           <% end %>
         </ul>
       <% end %>
     <% else %>
-      <h3><%= link_to "&hellip;#{this_admin.name}!".html_safe,
+      <h3><%= link_to "&hellip;#{this_admin.name}".html_safe,
         admin_path(this_admin) %></h3>
     <% end %>
 

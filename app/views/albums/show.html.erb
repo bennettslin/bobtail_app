@@ -1,0 +1,18 @@
+<%= render "songs/sidebar" %>
+<div id="main_content">
+
+  <h1><i><%= @album.title.html_safe %></i></h1>
+  <div id="text_description">
+    <%= @album.description.html_safe if @album.description.present? %>
+  </div>
+
+  <% if current_admin? %>
+    <div id="admin_span">
+      <span><%= link_to "Update album description", edit_album_path %></span>
+    </div>
+    <div id="admin_span">
+      <span><%= link_to "Create a new song", new_song_path(album_id: @album.id) %></span>
+    </div>
+  <% end %>
+</div>
+

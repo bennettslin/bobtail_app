@@ -7,6 +7,8 @@ BobtailApp::Application.routes.draw do
   resources :news_items, only: [:index, :new, :edit, :create, :update, :destroy]
   resources :shows_items, only: [:index, :new, :edit, :create, :update, :destroy]
   resources :projects
+  resources :albums
+  resources :songs
 
   get "login", to: "sessions#new"
   get "logout", to: "sessions#destroy"
