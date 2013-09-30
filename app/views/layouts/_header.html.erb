@@ -1,18 +1,25 @@
 <header>
+
+  <% if current_admin.present? %>
   <div id="admin_logged">
     <span>
-    <% if current_admin.present? %>
       Howdy, <%= current_admin.name %>!
         | <%= link_to "Admins page", admins_path %>
         | <%= link_to "Albums page", albums_path %>
         | <%= link_to "Logout", logout_path %>
-    <% elsif !Rails.env.production? %>
-      <%= link_to "Register", new_admin_path %> |
-        <%= link_to "Login", login_path %>
-    <% end %>
     </span>
-
   </div>
+  <% elsif !Rails.env.production? %>
+  <div id="admin_logged">
+    <span>
+      <%= link_to "Register", new_admin_path %>
+        | <%= link_to "Login", login_path %>
+   </span>
+  </div>
+  <% end %>
+
+
+
   <div id="title_logo">
     <%= link_to image_tag("bobtail_b.gif"), root_path %>
   </div>
