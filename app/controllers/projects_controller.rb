@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(projects_params)
     @project.admin_id = current_admin.id
-    last_num = Project.where("admin_id == ?", current_admin.id).maximum("order_num")
+    last_num = Project.where("admin_id = ?", current_admin.id).maximum("order_num")
     if last_num.nil?
       @project.order_num = 1
     else
@@ -89,7 +89,7 @@ class ProjectsController < ApplicationController
 
   def switch_order_nums(increment)
     @admin = Admin.find_by(id: @project.admin_id)
-    that_project = Project.where("admin_id == ?", @admin.id).
+    that_project = Project.where("admin_id = ?", @admin.id).
       find_by(order_num: (@project.order_num + increment))
     return if that_project.nil?
     this_num = @project.order_num

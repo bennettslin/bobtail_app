@@ -30,7 +30,7 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.new(songs_params)
-    last_num = Song.where("album_id == ?", @song.album_id).maximum("order_num")
+    last_num = Song.where("album_id = ?", @song.album_id).maximum("order_num")
     if last_num.nil?
       @song.order_num = 1
     else
@@ -89,7 +89,7 @@ class SongsController < ApplicationController
 
   def switch_order_nums(increment)
     @album = Album.find_by(id: @song.album_id)
-    that_song = Song.where("album_id == ?", @album.id).
+    that_song = Song.where("album_id = ?", @album.id).
       find_by(order_num: (@song.order_num + increment))
     return if that_song.nil?
     this_num = @song.order_num
