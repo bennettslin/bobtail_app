@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
     @admins = Admin.all
     @project = Project.find(params[:id])
     @admin = Admin.find_by(id: @project.admin_id)
-    @admin_projects = Project.where("admin_id == ?", @admin.id).order(:order_num)
+    @admin_projects = Project.where("admin_id = ?", @admin.id).order(:order_num)
   end
 
   def new

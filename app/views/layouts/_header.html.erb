@@ -1,18 +1,16 @@
 <header>
   <div id="admin_logged">
-    <% if !Rails.env.production? %>
-      <span>
-      <% if current_admin.present? %>
-        Howdy, <%= current_admin.name %>!
-          | <%= link_to "Admins page", admins_path %>
-          | <%= link_to "Albums page", albums_path %>
-          | <%= link_to "Logout", logout_path %>
-      <% else %>
-        <%= link_to "Register", new_admin_path %> |
-          <%= link_to "Login", login_path %>
-      <% end %>
-      </span>
+    <span>
+    <% if current_admin.present? %>
+      Howdy, <%= current_admin.name %>!
+        | <%= link_to "Admins page", admins_path %>
+        | <%= link_to "Albums page", albums_path %>
+        | <%= link_to "Logout", logout_path %>
+    <% elsif !Rails.env.production? %>
+      <%= link_to "Register", new_admin_path %> |
+        <%= link_to "Login", login_path %>
     <% end %>
+    </span>
 
   </div>
   <div id="title_logo">

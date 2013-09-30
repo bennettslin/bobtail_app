@@ -11,7 +11,7 @@ class AlbumsController < ApplicationController
     @songs_page = true
     @albums = Album.order("date ASC")
     @album = Album.find(params[:id])
-    @album_songs = Song.where("album_id == ?", @album.id).order(:order_num)
+    @album_songs = Song.where("album_id = ?", @album.id).order(:order_num)
   end
 
   def new
