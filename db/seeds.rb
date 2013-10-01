@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-first_admins = ["the band", "Bennett", "test admin"]
+first_admins = ["the band", "Bennett", "deletable admin"]
 
 count = 0
 first_admins.each do |name|
@@ -16,6 +16,12 @@ first_admins.each do |name|
     description: "The password is 'test'. Change this text and the password!",
     super_admin: super_status)
   count += 1
+end
+
+# deletable admin's projects
+5.times do |i|
+  Project.create(admin_id: 3, title: "Project no. #{i + 1}", description:
+    "<a href='http://www.yahoo.com'>Link to this project</a>", order_num: i + 1)
 end
 
 past_albums = [["Yearling's Bobtail I", "2013-06-01 00:00:00"],
