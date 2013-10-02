@@ -42,14 +42,17 @@ rfmhpg_songs = ["Young Rosalind at the World's Fair", "All the Peppy Paulinas",
   "Coffee in a Crucible", "Ruptures", "Photograph 51", "Unhatched", "Honest Jim",
   "Rosalind's Mosaic Path", "Last Labours", "Whale Fall"]
 
-ybi_songs.each do |song|
-  Song.create(title: song, album_id: 1, lyrics: "Add lyrics!")
+9.times do |i|
+  Song.create(title: ybi_songs[i], album_id: 1, lyrics: "Add lyrics!",
+    order_num: i + 1)
 end
-ybii_songs.each do |song|
-  Song.create(title: song, album_id: 2, lyrics: "Add lyrics!")
+9.times do |i|
+  Song.create(title: ybii_songs[i], album_id: 2, lyrics: "Add lyrics!",
+    order_num: i + 1)
 end
-rfmhpg_songs.each do |song|
-  Song.create(title: song, album_id: 3, lyrics: "Add lyrics!")
+10.times do |i|
+  Song.create(title: rfmhpg_songs[i], album_id: 3, lyrics: "Add lyrics!",
+    order_num: i + 1)
 end
 
 first_news = [["Welcome to our website!",
